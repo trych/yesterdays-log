@@ -1,0 +1,115 @@
+{
+  "name": "recent-files-only",
+  "displayName": "Recent Files Only",
+  "description": "Limit folder visibility to the N most recent files - perfect for log folders and generated file directories",
+  "version": "0.0.1",
+  "publisher": "timo",
+  "engines": {
+    "vscode": "^1.85.0"
+  },
+  "categories": [
+    "Other"
+  ],
+  "keywords": [
+    "files",
+    "explorer",
+    "hide",
+    "logs",
+    "recent"
+  ],
+  "activationEvents": [
+    "onStartupFinished"
+  ],
+  "main": "./out/extension.js",
+  "contributes": {
+    "configuration": {
+      "title": "Recent Files Only",
+      "properties": {
+        "recentFilesOnly.enabled": {
+          "type": "boolean",
+          "default": true,
+          "markdownDescription": "Enable or disable the **Recent Files Only** extension"
+        },
+        "recentFilesOnly.rules": {
+          "type": "array",
+          "default": [],
+          "markdownDescription": "Configure folder rules to limit visibility to the most recent files. Each rule needs a [glob pattern](https://code.visualstudio.com/docs/editor/glob-patterns) and a count or duration.\n\n```json\n[\n  { \"pattern\": \"**/logs\", \"show\": 3 },\n  { \"pattern\": \"**/output\", \"show\": \"7d\", \"exclude\": \"~$*\" }\n]\n```",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+              "pattern": {
+                "type": "string",
+                "markdownDescription": "Glob pattern to match folders (e.g., `**/logs`)"
+              },
+              "show": {
+                "oneOf": [
+                  {
+                    "type": "integer",
+                    "minimum": 1,
+                    "maximum": 100
+                  },
+                  {
+                    "type": "string",
+                    "pattern": "^\\d+[mhdwMy]$"
+                  }
+                ],
+                "default": 3,
+                "markdownDescription": "Files to show: a **number** (e.g., `3`) for count, or a **duration** (e.g., `7d`, `2w`, `3M`) for age-based.\n\nUnits: `m` minutes, `h` hours, `d` days, `w` weeks, `M` months, `y` years"
+              },
+              "exclude": {
+                "type": "string",
+                "markdownDescription": "Glob pattern for files to always hide and exclude from counting (e.g., `~$*` for Excel lock files)"
+              }
+            },
+            "required": ["pattern", "show"]
+          }
+        }
+      }
+    },
+    "commands": [
+      {
+        "command": "recentFilesOnly.toggle",
+        "title": "Recent Files Only: Toggle On/Off"
+      },
+      {
+        "command": "recentFilesOnly.addFolder",
+        "title": "Recent Files Only: Add Folder Rule"
+      },
+      {
+        "command": "recentFilesOnly.openGlobalSettings",
+        "title": "Recent Files Only: Open Global Settings"
+      },
+      {
+        "command": "recentFilesOnly.openProjectSettings",
+        "title": "Recent Files Only: Open Project Settings"
+      }
+    ],
+    "menus": {
+      "explorer/context": [
+        {
+          "command": "recentFilesOnly.addFolder",
+          "when": "explorerResourceIsFolder",
+          "group": "navigation"
+        }
+      ]
+    }
+  },
+  "scripts": {
+    "vscode:prepublish": "npm run compile",
+    "compile": "tsc -p ./",
+    "watch": "tsc -watch -p ./",
+    "lint": "eslint src --ext ts"
+  },
+  "devDependencies": {
+    "@types/node": "^20.10.0",
+    "@types/vscode": "^1.85.0",
+    "@typescript-eslint/eslint-plugin": "^6.13.0",
+    "@typescript-eslint/parser": "^6.13.0",
+    "eslint": "^8.54.0",
+    "typescript": "^5.3.0"
+  },
+  "dependencies": {
+    "minimatch": "^9.0.3"
+  }
+}
