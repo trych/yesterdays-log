@@ -15,7 +15,7 @@
   "homepage": "https://github.com/trych/yesterdays-log#readme",
   "icon": "images/icon.png",
   "galleryBanner": {
-    "color": "#252526",
+    "color": "#2d4a5e",
     "theme": "dark"
   },
   "engines": {
