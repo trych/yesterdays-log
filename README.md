@@ -1,10 +1,8 @@
-# Recent Files Only
+# Yesterday's Log
 
-A VS Code extension that limits folder visibility to the N most recent files or files within a time period. Perfect for:
+> *"Nothing is older than yesterday's log."*
 
-- Showing the most recent and relevant files only in log folders (`**/logs`)
-- Build output directories
-- Generated file folders
+So let's hide it. This VS Code extension declutters your workspace by showing only the most recent files in folders you specify — perfect for logs, build outputs, and other generated files that pile up fast.
 
 ## Features
 
@@ -20,13 +18,13 @@ A VS Code extension that limits folder visibility to the N most recent files or 
 ### 1. Add a rule via Command Palette
 
 1. Open Command Palette (`Cmd+Shift+P` / `Ctrl+Shift+P`)
-2. Run `Recent Files Only: Add Folder Rule`
+2. Run `Yesterday's Log: Add Folder Rule`
 3. Enter a folder pattern (e.g., `**/logs`)
 4. Enter how many files to show (number or duration like `7d`)
 
 ### 2. Add a rule via context menu
 
-Right-click any folder in the Explorer and select `Recent Files Only: Add Folder Rule`.
+Right-click any folder in the Explorer and select `Yesterday's Log: Add Folder Rule`.
 
 ### 3. Configure manually in settings
 
@@ -45,10 +43,10 @@ Add rules directly to your settings (user or workspace):
 
 | Command | Description |
 |---------|-------------|
-| `Recent Files Only: Toggle On/Off` | Enable or disable file hiding (shows all files when off) |
-| `Recent Files Only: Add Folder Rule` | Add a new rule interactively |
-| `Recent Files Only: Open Global Settings` | Open user settings filtered to this extension |
-| `Recent Files Only: Open Project Settings` | Open workspace settings filtered to this extension |
+| `Yesterday's Log: Toggle On/Off` | Enable or disable file hiding (shows all files when off) |
+| `Yesterday's Log: Add Folder Rule` | Add a new rule interactively |
+| `Yesterday's Log: Open Global Settings` | Open user settings filtered to this extension |
+| `Yesterday's Log: Open Project Settings` | Open workspace settings filtered to this extension |
 
 ## Settings
 
@@ -146,7 +144,7 @@ Temporary files (`*.tmp`) will always be hidden and won't count toward the 5 vis
 - Use `**/` prefix to match folders at any depth (e.g., `**/logs` matches `logs`, `src/logs`, `foo/bar/logs`)
 - Rules from user settings and workspace settings are merged
 - Use "Toggle On/Off" to temporarily show all hidden files without changing your rules
-- Check the Output panel (`Recent Files Only`) for debugging information
+- Check the Output panel (`Yesterday's Log`) for debugging information
 
 ## License
 

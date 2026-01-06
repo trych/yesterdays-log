@@ -1,9 +1,9 @@
 {
-  "name": "recent-files-only",
-  "displayName": "Recent Files Only",
-  "description": "Limit folder visibility to the N most recent files - perfect for log folders and generated file directories",
+  "name": "yesterdays-log",
+  "displayName": "Yesterday's Log",
+  "description": "Hide old files in folders, showing only the most recent ones - perfect for logs and generated files",
   "version": "0.0.1",
-  "publisher": "timo",
+  "publisher": "trych",
   "engines": {
     "vscode": "^1.85.0"
   },
@@ -23,12 +23,12 @@
   "main": "./out/extension.js",
   "contributes": {
     "configuration": {
-      "title": "Recent Files Only",
+      "title": "Yesterday's Log",
       "properties": {
         "recentFilesOnly.enabled": {
           "type": "boolean",
           "default": true,
-          "markdownDescription": "Enable or disable the **Recent Files Only** extension"
+          "markdownDescription": "Enable or disable the **Yesterday's Log** extension"
         },
         "recentFilesOnly.rules": {
           "type": "array",
@@ -70,19 +70,19 @@
     "commands": [
       {
         "command": "recentFilesOnly.toggle",
-        "title": "Recent Files Only: Toggle On/Off"
+        "title": "Yesterday's Log: Toggle On/Off"
       },
       {
         "command": "recentFilesOnly.addFolder",
-        "title": "Recent Files Only: Add Folder Rule"
+        "title": "Yesterday's Log: Add Folder Rule"
       },
       {
         "command": "recentFilesOnly.openGlobalSettings",
-        "title": "Recent Files Only: Open Global Settings"
+        "title": "Yesterday's Log: Open Global Settings"
       },
       {
         "command": "recentFilesOnly.openProjectSettings",
-        "title": "Recent Files Only: Open Project Settings"
+        "title": "Yesterday's Log: Open Project Settings"
       }
     ],
     "menus": {

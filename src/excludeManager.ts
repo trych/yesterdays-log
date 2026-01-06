@@ -105,6 +105,6 @@ export class ExcludeManager {
   }
 
   private log(message: string): void {
-    this.outputChannel.appendLine(`[RecentFilesOnly] ${message}`);
+    this.outputChannel.appendLine(`[YesterdaysLog] ${message}`);
   }
 }

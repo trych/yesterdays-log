@@ -71,7 +71,7 @@ async function findMatchingFolders(
       }
     } catch (error) {
       // Log but continue - permission errors are common
-      console.debug(`[RecentFilesOnly] Could not read directory ${dirUri.fsPath}: ${error}`);
+      console.debug(`[YesterdaysLog] Could not read directory ${dirUri.fsPath}: ${error}`);
     }
   }
 
@@ -102,12 +102,12 @@ async function getFilesInFolder(
             mtime: stat.mtime
           });
         } catch (error) {
-          console.debug(`[RecentFilesOnly] Could not stat file ${fileUri.fsPath}: ${error}`);
+          console.debug(`[YesterdaysLog] Could not stat file ${fileUri.fsPath}: ${error}`);
         }
       }
     }
   } catch (error) {
-    console.debug(`[RecentFilesOnly] Could not read folder ${folderUri.fsPath}: ${error}`);
+    console.debug(`[YesterdaysLog] Could not read folder ${folderUri.fsPath}: ${error}`);
   }
 
   return files;
@@ -272,7 +272,7 @@ export function getFilesToHide(scanResults: ScanResult[]): string[] {
       // Age-based: hide files older than the duration
       const durationMs = parseDuration(showValue);
       if (durationMs === null) {
-        console.warn(`[RecentFilesOnly] Invalid duration: ${showValue}`);
+        console.warn(`[YesterdaysLog] Invalid duration: ${showValue}`);
         toHide = [];
       } else {
         const cutoffTime = Date.now() - durationMs;

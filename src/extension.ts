@@ -9,7 +9,7 @@ let fileWatcher: FileWatcher;
 let outputChannel: vscode.OutputChannel;
 
 export async function activate(context: vscode.ExtensionContext): Promise<void> {
-  outputChannel = vscode.window.createOutputChannel('Recent Files Only');
+  outputChannel = vscode.window.createOutputChannel('Yesterday\'s Log');
   log('Extension activating...');
 
   // Initialize config with extension context for workspace state storage
@@ -93,11 +93,11 @@ async function toggleExtension(): Promise<void> {
   await config.setEnabled(newState);
 
   if (newState) {
-    vscode.window.showInformationMessage('Recent Files Only: On (hiding old files)');
+    vscode.window.showInformationMessage('Yesterday\'s Log: On (hiding old files)');
     fileWatcher.start();
     await refresh();
   } else {
-    vscode.window.showInformationMessage('Recent Files Only: Off (showing all files)');
+    vscode.window.showInformationMessage('Yesterday\'s Log: Off (showing all files)');
     fileWatcher.stop();
     await excludeManager.clearExclusions();
   }
@@ -181,7 +181,7 @@ async function addFolderRule(uri?: vscode.Uri): Promise<void> {
 async function openGlobalSettings(): Promise<void> {
   await vscode.commands.executeCommand(
     'workbench.action.openSettings',
-    '@ext:timo.recent-files-only'
+    '@ext:trych.yesterdays-log'
   );
 }
 
@@ -196,10 +196,10 @@ async function openProjectSettings(): Promise<void> {
 
   await vscode.commands.executeCommand(
     'workbench.action.openWorkspaceSettings',
-    '@ext:timo.recent-files-only'
+    '@ext:trych.yesterdays-log'
   );
 }
 
 function log(message: string): void {
-  outputChannel.appendLine(`[RecentFilesOnly] ${message}`);
+  outputChannel.appendLine(`[YesterdaysLog] ${message}`);
 }
