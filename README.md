@@ -32,7 +32,7 @@ Add rules directly to your settings (user or workspace):
 
 ```json
 {
-  "recentFilesOnly.rules": [
+  "yesterdaysLog.rules": [
     { "pattern": "**/logs", "show": 3 },
     { "pattern": "**/output", "show": "7d", "exclude": "*.tmp" }
   ]
@@ -52,8 +52,8 @@ Add rules directly to your settings (user or workspace):
 
 | Setting | Type | Default | Description |
 |---------|------|---------|-------------|
-| `recentFilesOnly.enabled` | boolean | `true` | Enable or disable the extension |
-| `recentFilesOnly.rules` | array | `[]` | Rules for limiting files in folders |
+| `yesterdaysLog.enabled` | boolean | `true` | Enable or disable the extension |
+| `yesterdaysLog.rules` | array | `[]` | Rules for limiting files in folders |
 
 ### Rule format
 
@@ -97,7 +97,7 @@ The extension carefully tracks which exclusion patterns it manages, so your own 
 
 ```json
 {
-  "recentFilesOnly.rules": [
+  "yesterdaysLog.rules": [
     { "pattern": "**/logs", "show": 3 }
   ]
 }
@@ -119,7 +119,7 @@ Only the 3 newest files will be visible:
 
 ```json
 {
-  "recentFilesOnly.rules": [
+  "yesterdaysLog.rules": [
     { "pattern": "**/reports", "show": "7d" }
   ]
 }
@@ -131,7 +131,7 @@ Files older than 7 days will be hidden.
 
 ```json
 {
-  "recentFilesOnly.rules": [
+  "yesterdaysLog.rules": [
     { "pattern": "**/output", "show": 5, "exclude": "*.tmp" }
   ]
 }

@@ -20,16 +20,16 @@ export async function activate(context: vscode.ExtensionContext): Promise<void> 
 
   // Register commands
   context.subscriptions.push(
-    vscode.commands.registerCommand('recentFilesOnly.toggle', toggleExtension),
-    vscode.commands.registerCommand('recentFilesOnly.addFolder', addFolderRule),
-    vscode.commands.registerCommand('recentFilesOnly.openGlobalSettings', openGlobalSettings),
-    vscode.commands.registerCommand('recentFilesOnly.openProjectSettings', openProjectSettings)
+    vscode.commands.registerCommand('yesterdaysLog.toggle', toggleExtension),
+    vscode.commands.registerCommand('yesterdaysLog.addFolder', addFolderRule),
+    vscode.commands.registerCommand('yesterdaysLog.openGlobalSettings', openGlobalSettings),
+    vscode.commands.registerCommand('yesterdaysLog.openProjectSettings', openProjectSettings)
   );
 
   // Listen for configuration changes
   context.subscriptions.push(
     vscode.workspace.onDidChangeConfiguration(e => {
-      if (e.affectsConfiguration('recentFilesOnly')) {
+      if (e.affectsConfiguration('yesterdaysLog')) {
         log('Configuration changed, refreshing...');
         handleConfigChange();
       }

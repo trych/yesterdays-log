@@ -25,12 +25,12 @@
     "configuration": {
       "title": "Yesterday's Log",
       "properties": {
-        "recentFilesOnly.enabled": {
+        "yesterdaysLog.enabled": {
           "type": "boolean",
           "default": true,
           "markdownDescription": "Enable or disable the **Yesterday's Log** extension"
         },
-        "recentFilesOnly.rules": {
+        "yesterdaysLog.rules": {
           "type": "array",
           "default": [],
           "markdownDescription": "Configure folder rules to limit visibility to the most recent files. Each rule needs a [glob pattern](https://code.visualstudio.com/docs/editor/glob-patterns) and a count or duration.\n\n```json\n[\n  { \"pattern\": \"**/logs\", \"show\": 3 },\n  { \"pattern\": \"**/output\", \"show\": \"7d\", \"exclude\": \"*.tmp\" }\n]\n```",
@@ -69,28 +69,28 @@
     },
     "commands": [
       {
-        "command": "recentFilesOnly.toggle",
+        "command": "yesterdaysLog.toggle",
         "title": "Yesterday's Log: Toggle On/Off"
       },
       {
-        "command": "recentFilesOnly.addFolder",
+        "command": "yesterdaysLog.addFolder",
         "title": "Yesterday's Log: Add Folder Rule"
       },
       {
-        "command": "recentFilesOnly.openGlobalSettings",
+        "command": "yesterdaysLog.openGlobalSettings",
         "title": "Yesterday's Log: Open Global Settings"
       },
       {
-        "command": "recentFilesOnly.openProjectSettings",
+        "command": "yesterdaysLog.openProjectSettings",
         "title": "Yesterday's Log: Open Project Settings"
       }
     ],
     "menus": {
       "explorer/context": [
         {
-          "command": "recentFilesOnly.addFolder",
+          "command": "yesterdaysLog.addFolder",
           "when": "explorerResourceIsFolder",
-          "group": "z_recentFilesOnly"
+          "group": "z_yesterdaysLog"
         }
       ]
     }

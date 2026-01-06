@@ -1,7 +1,7 @@
 import * as vscode from 'vscode';
 import { Rule } from './types';
 
-const CONFIG_SECTION = 'recentFilesOnly';
+const CONFIG_SECTION = 'yesterdaysLog';
 const MANAGED_EXCLUSIONS_KEY = 'managedExclusions';
 
 let extensionContext: vscode.ExtensionContext | undefined;
