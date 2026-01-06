@@ -2,8 +2,22 @@
   "name": "yesterdays-log",
   "displayName": "Yesterday's Log",
   "description": "Hide old files in folders, showing only the most recent ones - perfect for logs and generated files",
-  "version": "0.0.1",
+  "version": "1.0.0",
   "publisher": "trych",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/trych/yesterdays-log"
+  },
+  "bugs": {
+    "url": "https://github.com/trych/yesterdays-log/issues"
+  },
+  "homepage": "https://github.com/trych/yesterdays-log#readme",
+  "icon": "images/icon.png",
+  "galleryBanner": {
+    "color": "#252526",
+    "theme": "dark"
+  },
   "engines": {
     "vscode": "^1.85.0"
   },
@@ -96,7 +110,7 @@
     }
   },
   "scripts": {
-    "vscode:prepublish": "npm run compile",
+    "vscode:prepublish": "pnpm run compile",
     "compile": "tsc -p ./",
     "watch": "tsc -watch -p ./",
     "lint": "eslint src --ext ts"
