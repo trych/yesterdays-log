@@ -33,7 +33,7 @@
         "recentFilesOnly.rules": {
           "type": "array",
           "default": [],
-          "markdownDescription": "Configure folder rules to limit visibility to the most recent files. Each rule needs a [glob pattern](https://code.visualstudio.com/docs/editor/glob-patterns) and a count or duration.\n\n```json\n[\n  { \"pattern\": \"**/logs\", \"show\": 3 },\n  { \"pattern\": \"**/output\", \"show\": \"7d\", \"exclude\": \"~$*\" }\n]\n```",
+          "markdownDescription": "Configure folder rules to limit visibility to the most recent files. Each rule needs a [glob pattern](https://code.visualstudio.com/docs/editor/glob-patterns) and a count or duration.\n\n```json\n[\n  { \"pattern\": \"**/logs\", \"show\": 3 },\n  { \"pattern\": \"**/output\", \"show\": \"7d\", \"exclude\": \"*.tmp\" }\n]\n```",
           "items": {
             "type": "object",
             "additionalProperties": false,
@@ -59,7 +59,7 @@
               },
               "exclude": {
                 "type": "string",
-                "markdownDescription": "Glob pattern for files to always hide and exclude from counting (e.g., `~$*` for Excel lock files)"
+                "markdownDescription": "Glob pattern for files to always hide and exclude from counting (e.g., `*.tmp` for temporary files)"
               }
             },
             "required": ["pattern", "show"]
@@ -90,7 +90,7 @@
         {
           "command": "recentFilesOnly.addFolder",
           "when": "explorerResourceIsFolder",
-          "group": "navigation"
+          "group": "z_recentFilesOnly"
         }
       ]
     }

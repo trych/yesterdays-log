@@ -1,6 +1,7 @@
 import * as vscode from 'vscode';
 import { minimatch } from 'minimatch';
 import { Rule, FileInfo, ScanResult } from './types';
+import * as config from './config';
 
 const MAX_DEPTH = 20;
 
@@ -193,6 +194,36 @@ function matchesExcludePattern(filename: string, excludePattern: string): boolea
 }
 
 /**
+ * Get patterns from VS Code's files.exclude that are NOT managed by us.
+ */
+function getExternalExcludePatterns(): string[] {
+  const filesConfig = vscode.workspace.getConfiguration('files');
+  const allExcludes = filesConfig.get<Record<string, boolean>>('exclude') || {};
+  const managedExclusions = config.getManagedExclusions();
+
+  // Return patterns that are enabled and not managed by us
+  return Object.entries(allExcludes)
+    .filter(([pattern, enabled]) => enabled && !(pattern in managedExclusions))
+    .map(([pattern]) => pattern);
+}
+
+/**
+ * Check if a file path matches any of VS Code's external exclude patterns.
+ */
+function isExcludedByVSCode(relativePath: string): boolean {
+  const patterns = getExternalExcludePatterns();
+  const filename = relativePath.split(/[/\\]/).pop() || '';
+
+  for (const pattern of patterns) {
+    if (minimatch(relativePath, pattern, { matchBase: true, dot: true }) ||
+        minimatch(filename, pattern, { matchBase: true, dot: true })) {
+      return true;
+    }
+  }
+  return false;
+}
+
+/**
  * Determine which files should be hidden based on scan results.
  * Returns relative paths of files to hide.
  */
@@ -205,6 +236,11 @@ export function getFilesToHide(scanResults: ScanResult[]): string[] {
     const candidateFiles: FileInfo[] = [];
 
     for (const file of result.files) {
+      // Skip files already hidden by VS Code's files.exclude
+      if (isExcludedByVSCode(file.relativePath)) {
+        continue;
+      }
+
       const filename = file.relativePath.split(/[/\\]/).pop() || '';
       if (result.exclude && matchesExcludePattern(filename, result.exclude)) {
         excludedFiles.push(file);
@@ -224,14 +260,19 @@ export function getFilesToHide(scanResults: ScanResult[]): string[] {
     // Determine which files to hide based on show value
     let toHide: FileInfo[];
 
-    if (typeof result.show === 'number') {
+    // Normalize show value - handle string numbers from settings
+    const showValue = typeof result.show === 'string' && /^\d+$/.test(result.show)
+      ? parseInt(result.show, 10)
+      : result.show;
+
+    if (typeof showValue === 'number') {
       // Count-based: hide all but the N newest
-      toHide = sortedFiles.slice(result.show);
+      toHide = sortedFiles.slice(showValue);
     } else {
       // Age-based: hide files older than the duration
-      const durationMs = parseDuration(result.show);
+      const durationMs = parseDuration(showValue);
       if (durationMs === null) {
-        console.warn(`[RecentFilesOnly] Invalid duration: ${result.show}`);
+        console.warn(`[RecentFilesOnly] Invalid duration: ${showValue}`);
         toHide = [];
       } else {
         const cutoffTime = Date.now() - durationMs;
