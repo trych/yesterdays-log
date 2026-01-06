@@ -148,4 +148,4 @@ Temporary files (`*.tmp`) will always be hidden and won't count toward the 5 vis
 
 ## License
 
-MIT
+[MIT](LICENSE)
